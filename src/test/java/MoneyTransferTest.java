@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 import ru.netology.page.LoginPage;
@@ -7,10 +8,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.netology.data.DataHelper.*;
 
 public class MoneyTransferTest {
+    LoginPage loginPage;
+
+
+    @BeforeEach
+    void setUp() {
+        loginPage = open("http://localhost:9999", LoginPage.class);
+    }
 
     @Test
     public void shouldTransferMoneyFirstToSecond() {
-        var loginPage = open("http://localhost:9999", LoginPage.class);
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCode();
